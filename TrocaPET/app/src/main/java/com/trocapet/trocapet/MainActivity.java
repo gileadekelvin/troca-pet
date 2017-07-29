@@ -1,5 +1,6 @@
 package com.trocapet.trocapet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -17,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_mapa:
-                    mTextMessage.setText(R.string.title_mapa);
-                    return true;
                 case R.id.navigation_perfil:
                     mTextMessage.setText(R.string.title_perfil);
                     return true;
+                case R.id.navigation_mapa:
+                    Intent intent = new Intent(getApplication(), MapsActivity.class);
+                    startActivity(intent);
                 case R.id.navigation_qrcode:
                     mTextMessage.setText(R.string.title_qrcode);
                     return true;
