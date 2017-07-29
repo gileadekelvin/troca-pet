@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      >
+
+    <item
+        android:id="@+id/ic_arrow"
+        android:icon="@drawable/ic_arrow_back"
+        android:title="Back"
+        />
+
+    <item
+        android:id="@+id/navigation_perfil"
+        android:icon="@drawable/ic_perfil"
+        android:title="@string/title_perfil" />
+
+    <item
+        android:id="@+id/navigation_mapa"
+        android:icon="@drawable/ic_mapa"
+        android:title="@string/title_mapa" />
+
+    <item
+        android:id="@+id/navigation_qrcode"
+        android:icon="@drawable/ic_qr_code"
+        android:title="@string/title_qrcode" />
+
+
+
+
+</menu>

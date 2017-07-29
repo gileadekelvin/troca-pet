@@ -23,7 +23,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity android:name=".ActivityOne" />
+        <activity android:name=".ActivityTwo" />
+        <activity android:name=".ActivityThree" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
