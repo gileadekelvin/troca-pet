@@ -14,6 +14,7 @@ import android.widget.TextView;
  * Created by User on 4/15/2017.
  */
 
+
 public class ActivityOne extends AppCompatActivity {
 
     @Override
@@ -26,9 +27,7 @@ public class ActivityOne extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(1);
-        menuItem.setChecked(true);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_perfil);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -36,6 +35,7 @@ public class ActivityOne extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
                         Intent intent0 = new Intent(ActivityOne.this, MainActivity.class);
+                        intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent0);
                         break;
 
@@ -45,11 +45,13 @@ public class ActivityOne extends AppCompatActivity {
 
                     case R.id.navigation_mapa:
                         Intent intent2 = new Intent(ActivityOne.this, MapsActivity.class);
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent2);
                         break;
 
                     case R.id.navigation_qrcode:
                         Intent intent3 = new Intent(ActivityOne.this, ActivityThree.class);
+                        intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent3);
                         break;
 

@@ -26,9 +26,7 @@ public class ActivityThree extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(3);
-        menuItem.setChecked(true);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_qrcode);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -36,16 +34,19 @@ public class ActivityThree extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
                         Intent intent0 = new Intent(ActivityThree.this, MainActivity.class);
+                        intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent0);
                         break;
 
                     case R.id.navigation_perfil:
                         Intent intent1 = new Intent(ActivityThree.this, ActivityOne.class);
+                        intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent1);
                         break;
 
                     case R.id.navigation_mapa:
                         Intent intent2 = new Intent(ActivityThree.this, MapsActivity.class);
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent2);
                         break;
 
