@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -50,7 +49,7 @@ public class ActivityOne extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_qrcode:
-                        Intent intent3 = new Intent(ActivityOne.this, ActivityThree.class);
+                        Intent intent3 = new Intent(ActivityOne.this, QRCodeActivity.class);
                         intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent3);
                         break;
