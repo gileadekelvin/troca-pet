@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +23,12 @@ import com.google.zxing.integration.android.IntentResult;
 public class QRCodeActivity extends AppCompatActivity {
 
     public final static String QRCODE_VALIDO = "valido";
+    private Button conectar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_three);
-
-        TextView title = (TextView) findViewById(R.id.activityTitle3);
-        title.setText("Conectar");
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -36,13 +36,21 @@ public class QRCodeActivity extends AppCompatActivity {
 
         final Activity activity = this;
 
-        IntentIntegrator integrator = new IntentIntegrator(activity);
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-        integrator.setPrompt("SCAN");
-        integrator.setCameraId(0);
-        integrator.setBeepEnabled(false);
-        integrator.setBarcodeImageEnabled(false);
-        integrator.initiateScan();
+        conectar = (Button) findViewById(R.id.conectar);
+
+        conectar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator integrator = new IntentIntegrator(activity);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setPrompt("SCAN");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(false);
+                integrator.initiateScan();
+            }
+        });
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -90,9 +98,9 @@ public class QRCodeActivity extends AppCompatActivity {
             } else {
                 System.out.println("Qrcode lido");
                 if (result.getContents().equals(QRCODE_VALIDO)){
-                    Toast.makeText(this, "QRCODE VALIDO!!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "QRCODE VÁLIDO!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this, "QRCODE INVALIDO!!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "QRCODE INVÁLIDO!", Toast.LENGTH_LONG).show();
                 }
             }
 
