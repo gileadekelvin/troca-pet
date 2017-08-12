@@ -3,7 +3,9 @@ package com.trocapet.trocapet;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -100,6 +102,15 @@ public class QRCodeActivity extends AppCompatActivity {
             } else {
                 System.out.println("Qrcode lido");
                 if (result.getContents().equals(QRCODE_VALIDO)){
+
+                    //Atualizando pontos
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                    int points =  prefs.getInt("POINTS", 0);
+                    SharedPreferences.Editor prefEditor = prefs.edit();
+                    prefEditor.putInt("POINTS", points + 1);
+                    prefEditor.commit();
+
+                    // Exibindo mensagem de confirmação
                     new AlertDialog.Builder(QRCodeActivity.this)
                             .setTitle("Parabéns!")
                             .setMessage("Você adicionou uma garrafa e mais um ponto a sua conta.")
