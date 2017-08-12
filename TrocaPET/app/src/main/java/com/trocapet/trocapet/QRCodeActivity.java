@@ -1,11 +1,13 @@
 package com.trocapet.trocapet;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,9 +100,33 @@ public class QRCodeActivity extends AppCompatActivity {
             } else {
                 System.out.println("Qrcode lido");
                 if (result.getContents().equals(QRCODE_VALIDO)){
-                    Toast.makeText(this, "QRCODE VÁLIDO!", Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(QRCodeActivity.this)
+                            .setTitle("Parabéns!")
+                            .setMessage("Você adicionou uma garrafa e mais um ponto a sua conta.")
+                            .setPositiveButton("Nova garrafa", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    conectar.performClick();
+                                }
+                            })
+                            .setNeutralButton("Pontuação", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent1 = new Intent(QRCodeActivity.this, ActivityOne.class);
+                                    intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                    startActivity(intent1);
+                                }
+                            })
+                            .show();
                 } else {
-                    Toast.makeText(this, "QRCODE INVÁLIDO!", Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(QRCodeActivity.this)
+                            .setTitle("Não foi dessa vez!")
+                            .setMessage("O qrcode lido não é válido.")
+                            .setPositiveButton("Tentar novamente", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    conectar.performClick();
+                                }
+                            })
+                            .show();
                 }
             }
 
