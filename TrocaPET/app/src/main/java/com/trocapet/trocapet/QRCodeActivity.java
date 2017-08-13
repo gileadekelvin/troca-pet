@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,8 @@ import com.google.zxing.integration.android.IntentResult;
 public class QRCodeActivity extends AppCompatActivity {
 
     public final static String QRCODE_VALIDO = "valido";
-    private Button conectar;
+    private TextView qrcode_message;
+    private ImageView qrcode_img;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,11 +42,19 @@ public class QRCodeActivity extends AppCompatActivity {
 
         final Activity activity = this;
 
-        conectar = (Button) findViewById(R.id.conectar);
+        qrcode_message = (TextView) findViewById(R.id.qrcode_message);
+        qrcode_message.setText("Conecte-se ao coletor através do seu celular e troque suas garrafas PET. Clique no QRcode para iniciar leitura.");
 
-        conectar.setOnClickListener(new View.OnClickListener() {
+        qrcode_img = (ImageView) findViewById(R.id.qrcode_img);
+
+        qrcode_img.setImageResource(R.drawable.qrcode_img);
+        qrcode_img.setAdjustViewBounds(true);
+        qrcode_img.setMaxHeight(750);
+        qrcode_img.setMaxWidth(750);
+
+        qrcode_img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("SCAN");
@@ -54,7 +64,6 @@ public class QRCodeActivity extends AppCompatActivity {
                 integrator.initiateScan();
             }
         });
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -116,7 +125,7 @@ public class QRCodeActivity extends AppCompatActivity {
                             .setMessage("Você adicionou uma garrafa e mais um ponto a sua conta.")
                             .setPositiveButton("Nova garrafa", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    conectar.performClick();
+                                    qrcode_img.performClick();
                                 }
                             })
                             .setNeutralButton("Pontuação", new DialogInterface.OnClickListener() {
@@ -134,7 +143,7 @@ public class QRCodeActivity extends AppCompatActivity {
                             .setMessage("O qrcode lido não é válido.")
                             .setPositiveButton("Tentar novamente", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    conectar.performClick();
+                                    qrcode_img.performClick();
                                 }
                             })
                             .show();
