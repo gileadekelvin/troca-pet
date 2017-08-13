@@ -28,8 +28,6 @@
         </RelativeLayout>
 
 
-
-
         <RelativeLayout
             android:layout_below="@+id/topBar"
             android:layout_above="@+id/bottomBar"
@@ -40,16 +38,42 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:textSize="30sp"
+                android:layout_marginTop="14dp"
+                android:textSize="24sp"
                 android:id="@+id/activityTitle1"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/colorPrimary"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:id="@+id/profileImg"
+                android:layout_below="@+id/activityTitle1"
+                android:layout_centerHorizontal="true"
+                android:scaleType="center"
+                android:adjustViewBounds="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/ecopoints"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="27dp"
+                android:layout_below="@+id/profileImg"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
         </RelativeLayout>
-
-
-
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -68,21 +92,7 @@
             </android.support.design.widget.BottomNavigationView>
         </RelativeLayout>
 
-
-
     </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </android.support.design.widget.CoordinatorLayout>
