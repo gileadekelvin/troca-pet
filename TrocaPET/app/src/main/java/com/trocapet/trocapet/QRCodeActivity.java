@@ -1,15 +1,20 @@
 package com.trocapet.trocapet;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +28,8 @@ import com.google.zxing.integration.android.IntentResult;
 public class QRCodeActivity extends AppCompatActivity {
 
     public final static String QRCODE_VALIDO = "valido";
-    private Button conectar;
+    private TextView qrcode_message;
+    private ImageView qrcode_img;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,11 +42,19 @@ public class QRCodeActivity extends AppCompatActivity {
 
         final Activity activity = this;
 
-        conectar = (Button) findViewById(R.id.conectar);
+        qrcode_message = (TextView) findViewById(R.id.qrcode_message);
+        qrcode_message.setText("Conecte-se ao coletor através do seu celular e troque suas garrafas PET. Clique no QRcode para iniciar leitura.");
 
-        conectar.setOnClickListener(new View.OnClickListener() {
+        qrcode_img = (ImageView) findViewById(R.id.qrcode_img);
+
+        qrcode_img.setImageResource(R.drawable.qrcode_img);
+        qrcode_img.setAdjustViewBounds(true);
+        qrcode_img.setMaxHeight(750);
+        qrcode_img.setMaxWidth(750);
+
+        qrcode_img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("SCAN");
@@ -50,7 +64,6 @@ public class QRCodeActivity extends AppCompatActivity {
                 integrator.initiateScan();
             }
         });
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -98,9 +111,42 @@ public class QRCodeActivity extends AppCompatActivity {
             } else {
                 System.out.println("Qrcode lido");
                 if (result.getContents().equals(QRCODE_VALIDO)){
-                    Toast.makeText(this, "QRCODE VÁLIDO!", Toast.LENGTH_LONG).show();
+
+                    //Atualizando pontos
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                    int points =  prefs.getInt("POINTS", 0);
+                    SharedPreferences.Editor prefEditor = prefs.edit();
+                    prefEditor.putInt("POINTS", points + 1);
+                    prefEditor.commit();
+
+                    // Exibindo mensagem de confirmação
+                    new AlertDialog.Builder(QRCodeActivity.this)
+                            .setTitle("Parabéns!")
+                            .setMessage("Você adicionou uma garrafa e mais um ponto a sua conta.")
+                            .setPositiveButton("Nova garrafa", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    qrcode_img.performClick();
+                                }
+                            })
+                            .setNeutralButton("Pontuação", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent1 = new Intent(QRCodeActivity.this, ActivityOne.class);
+                                    intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                    startActivity(intent1);
+                                }
+                            })
+                            .show();
                 } else {
-                    Toast.makeText(this, "QRCODE INVÁLIDO!", Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(QRCodeActivity.this)
+                            .setTitle("Não foi dessa vez!")
+                            .setMessage("O qrcode lido não é válido.")
+                            .setPositiveButton("Tentar novamente", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    qrcode_img.performClick();
+                                }
+                            })
+                            .show();
                 }
             }
 

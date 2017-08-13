@@ -1,12 +1,23 @@
 package com.trocapet.trocapet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.EditText;
+
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -16,14 +27,32 @@ import android.widget.TextView;
 
 public class ActivityOne extends AppCompatActivity {
 
+    private String userName = "Gileade";
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        // atualiza pontuação com a activity em resumo (em segundo plano)
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int points =  prefs.getInt("POINTS", 0);
+        setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
+
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_one);
 
-        TextView title = (TextView) findViewById(R.id.activityTitle1);
-        title.setText("Perfil");
+        setProfilePicture(R.drawable.gilekel);
 
+        setUpTextViews();
+
+        setUpNavigation();
+    }
+
+    private void setUpNavigation() {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.navigation_perfil);
@@ -33,32 +62,61 @@ public class ActivityOne extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
-                        Intent intent0 = new Intent(ActivityOne.this, MainActivity.class);
-                        intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent0);
+                        startPassedActivity(MainActivity.class);
                         break;
 
                     case R.id.navigation_perfil:
-
                         break;
 
                     case R.id.navigation_mapa:
-                        Intent intent2 = new Intent(ActivityOne.this, MapsActivity.class);
-                        intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent2);
+                        startPassedActivity(MapsActivity.class);
                         break;
 
                     case R.id.navigation_qrcode:
-                        Intent intent3 = new Intent(ActivityOne.this, QRCodeActivity.class);
-                        intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent3);
+                        startPassedActivity(QRCodeActivity.class);
                         break;
-
                 }
-
-
                 return false;
             }
         });
+    }
+
+
+    private void startPassedActivity(final Class<?> activityToStart) {
+        Intent intent = new Intent(ActivityOne.this, activityToStart);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+        startActivity(intent);
+    }
+
+
+    private TextView setTextFor(final int textViewToSetUpTheText, final String textContent){
+        TextView view = (TextView) findViewById(textViewToSetUpTheText);
+
+        view.setText(textContent);
+
+        return view;
+    }
+
+
+    private void setProfilePicture(final int pictureIdLocation) {
+        ImageView mImageView = (ImageView) findViewById(R.id.profileImg);
+
+        mImageView.setImageResource(pictureIdLocation);
+        mImageView.setAdjustViewBounds(true);
+        mImageView.setMaxHeight(650);
+        mImageView.setMaxWidth(650);
+    }
+
+
+    private void setUpTextViews() {
+
+        TextView title = setTextFor(R.id.activityTitle1, "Olá, " + userName);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int points =  prefs.getInt("POINTS", 0);
+
+        TextView ecopoints = setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
     }
 }
