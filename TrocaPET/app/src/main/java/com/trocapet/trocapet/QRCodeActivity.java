@@ -13,10 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -36,15 +34,59 @@ public class QRCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_three);
 
+        final Activity activityAtual = this;
+
+        setUpQRCodeMsg();
+
+        setUpQRCodeImg(activityAtual);
+
+        setUpNavigation();
+    }
+
+    private void setUpNavigation() {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.navigation_qrcode);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.ic_arrow:
+                        iniciarActivity(MainActivity.class);
+                        break;
 
-        final Activity activity = this;
+                    case R.id.navigation_perfil:
+                        iniciarActivity(ActivityOne.class);
+                        break;
 
+                    case R.id.navigation_mapa:
+                        iniciarActivity(MapsActivity.class);
+                        break;
+
+                    case R.id.navigation_qrcode:
+                        break;
+                }
+
+                return false;
+            }
+        });
+    }
+
+    private void iniciarActivity(final Class<?> activityQueVaiSerIniciada) {
+        Intent intent = new Intent(QRCodeActivity.this, activityQueVaiSerIniciada);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+        startActivity(intent);
+    }
+
+
+    private void setUpQRCodeMsg() {
         qrcode_message = (TextView) findViewById(R.id.qrcode_message);
         qrcode_message.setText("Conecte-se ao coletor através do seu celular e troque suas garrafas PET. Clique no QRcode para iniciar leitura.");
+    }
 
+    private void setUpQRCodeImg(final Activity activity) {
         qrcode_img = (ImageView) findViewById(R.id.qrcode_img);
 
         qrcode_img.setImageResource(R.drawable.qrcode_img);
@@ -62,38 +104,6 @@ public class QRCodeActivity extends AppCompatActivity {
                 integrator.setBeepEnabled(false);
                 integrator.setBarcodeImageEnabled(false);
                 integrator.initiateScan();
-            }
-        });
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.ic_arrow:
-                        Intent intent0 = new Intent(QRCodeActivity.this, MainActivity.class);
-                        intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent0);
-                        break;
-
-                    case R.id.navigation_perfil:
-                        Intent intent1 = new Intent(QRCodeActivity.this, ActivityOne.class);
-                        intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent1);
-                        break;
-
-                    case R.id.navigation_mapa:
-                        Intent intent2 = new Intent(QRCodeActivity.this, MapsActivity.class);
-                        intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent2);
-                        break;
-
-                    case R.id.navigation_qrcode:
-
-                        break;
-                }
-
-
-                return false;
             }
         });
     }

@@ -2,22 +2,15 @@ package com.trocapet.trocapet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -27,16 +20,19 @@ import android.widget.TextView;
 
 public class ActivityOne extends AppCompatActivity {
 
-    private String userName = "Gileade";
+    private String usuario = "Gilekel";
+
+    private int pontos;
+
+    private final String msgInformandoPontuacao = "Você possui: " + pontos + " ecopoints";
 
     @Override
     protected void onResume(){
         super.onResume();
         // atualiza pontuação com a activity em resumo (em segundo plano)
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int points =  prefs.getInt("POINTS", 0);
-        setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
-
+        pontos =  prefs.getInt("POINTS", 0);
+        setTextFor(R.id.ecopoints, msgInformandoPontuacao);
     }
 
     @Override
@@ -62,18 +58,18 @@ public class ActivityOne extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
-                        startPassedActivity(MainActivity.class);
+                        iniciarActivity(MainActivity.class);
                         break;
 
                     case R.id.navigation_perfil:
                         break;
 
                     case R.id.navigation_mapa:
-                        startPassedActivity(MapsActivity.class);
+                        iniciarActivity(MapsActivity.class);
                         break;
 
                     case R.id.navigation_qrcode:
-                        startPassedActivity(QRCodeActivity.class);
+                        iniciarActivity(QRCodeActivity.class);
                         break;
                 }
                 return false;
@@ -82,8 +78,8 @@ public class ActivityOne extends AppCompatActivity {
     }
 
 
-    private void startPassedActivity(final Class<?> activityToStart) {
-        Intent intent = new Intent(ActivityOne.this, activityToStart);
+    private void iniciarActivity(final Class<?> activityQueVaiSerIniciada) {
+        Intent intent = new Intent(ActivityOne.this, activityQueVaiSerIniciada);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
@@ -112,11 +108,11 @@ public class ActivityOne extends AppCompatActivity {
 
     private void setUpTextViews() {
 
-        TextView title = setTextFor(R.id.activityTitle1, "Olá, " + userName);
+        TextView titulo = setTextFor(R.id.activityTitle1, "Olá, " + usuario);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int points =  prefs.getInt("POINTS", 0);
+        pontos =  prefs.getInt("POINTS", 0);
 
-        TextView ecopoints = setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
+        TextView ecopoints = setTextFor(R.id.ecopoints, msgInformandoPontuacao);
     }
 }

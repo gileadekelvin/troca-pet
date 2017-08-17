@@ -23,6 +23,10 @@ public class ActivityTwo extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.activityTitle2);
         title.setText("This is ActivityTwo");
 
+        setUpNavigation();
+    }
+
+    private void setUpNavigation() {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.navigation_mapa);
@@ -32,33 +36,31 @@ public class ActivityTwo extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
-                        Intent intent0 = new Intent(ActivityTwo.this, MainActivity.class);
-                        intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent0);
+                        iniciarActivity(MainActivity.class);
                         break;
 
                     case R.id.navigation_perfil:
-                        Intent intent1 = new Intent(ActivityTwo.this, ActivityOne.class);
-                        intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent1);
+                        iniciarActivity(ActivityOne.class);
                         break;
 
                     case R.id.navigation_mapa:
-
                         break;
 
                     case R.id.navigation_qrcode:
-                        Intent intent3 = new Intent(ActivityTwo.this, QRCodeActivity.class);
-                        intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent3);
+                        iniciarActivity(QRCodeActivity.class);
                         break;
-
                 }
-
-
                 return false;
             }
         });
+    }
+
+    private void iniciarActivity(final Class<?> activityQueVaiSerIniciada) {
+        Intent intent = new Intent(ActivityTwo.this, activityQueVaiSerIniciada);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+        startActivity(intent);
     }
 
 }
