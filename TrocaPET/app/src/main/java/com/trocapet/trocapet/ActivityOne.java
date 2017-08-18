@@ -3,6 +3,7 @@ package com.trocapet.trocapet;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -20,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by User on 4/15/2017.
  */
@@ -27,7 +30,7 @@ import android.widget.TextView;
 
 public class ActivityOne extends AppCompatActivity {
 
-    private String userName = "Gileade";
+    private String userName = "Gileade Kelvin";
 
     @Override
     protected void onResume(){
@@ -35,7 +38,7 @@ public class ActivityOne extends AppCompatActivity {
         // atualiza pontuação com a activity em resumo (em segundo plano)
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int points =  prefs.getInt("POINTS", 0);
-        setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
+        setTextFor(R.id.ecopoints, "" + points);
 
     }
 
@@ -101,22 +104,27 @@ public class ActivityOne extends AppCompatActivity {
 
 
     private void setProfilePicture(final int pictureIdLocation) {
-        ImageView mImageView = (ImageView) findViewById(R.id.profileImg);
+        CircleImageView mImageView = (CircleImageView) findViewById(R.id.profileImg);
 
         mImageView.setImageResource(pictureIdLocation);
-        mImageView.setAdjustViewBounds(true);
-        mImageView.setMaxHeight(650);
-        mImageView.setMaxWidth(650);
+        mImageView.setAdjustViewBounds(false);
+        mImageView.setMaxHeight(800);
+        mImageView.setMaxWidth(800);
+
+
     }
 
 
     private void setUpTextViews() {
 
-        TextView title = setTextFor(R.id.activityTitle1, "Olá, " + userName);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/dancing-script.regular.ttf");
+
+        TextView title = setTextFor(R.id.activityTitle1, userName);
+        title.setTypeface(custom_font);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int points =  prefs.getInt("POINTS", 0);
 
-        TextView ecopoints = setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
+        TextView ecopoints = setTextFor(R.id.ecopoints, "" + points);
     }
 }
