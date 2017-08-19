@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 public class CustomAdapter extends ArrayAdapter{
 
+    private ImageView imageView;
+    private TextView txtTitle;
+    private TextView txtDescription;
+
     private final Activity context;
     private final String[] itemName;
     private final Integer[] imgsID;
@@ -28,16 +32,25 @@ public class CustomAdapter extends ArrayAdapter{
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
+
         View rowView = inflater.inflate(R.layout.my_list, null,true);
 
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.Itemname);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        //TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
+        setUpViewsIn(rowView);
 
         txtTitle.setText(itemName[position]);
         imageView.setImageResource(imgsID[position]);
-        //extratxt.setText("Description "+itemName[position]);
+        txtDescription.setText("Requer xx ecopoints.");
+
         return rowView;
 
-    };
+    }
+
+    private void setUpViewsIn(View rowView) {
+
+        txtTitle = (TextView) rowView.findViewById(R.id.item_name);
+
+        imageView = (ImageView) rowView.findViewById(R.id.icon);
+
+        txtDescription = (TextView) rowView.findViewById(R.id.description);
+    }
 }
