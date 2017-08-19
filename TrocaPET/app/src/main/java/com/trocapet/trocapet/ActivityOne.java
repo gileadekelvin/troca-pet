@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
@@ -38,7 +39,8 @@ public class ActivityOne extends AppCompatActivity {
         // atualiza pontuação com a activity em resumo (em segundo plano)
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int points =  prefs.getInt("POINTS", 0);
-        setTextFor(R.id.ecopoints, "" + points);
+        Button but_points = (Button) findViewById(R.id.points);
+        but_points.setText(points + " pontos");
 
     }
 
@@ -118,13 +120,14 @@ public class ActivityOne extends AppCompatActivity {
     private void setUpTextViews() {
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/dancing-script.regular.ttf");
-
-        TextView title = setTextFor(R.id.activityTitle1, userName);
-        title.setTypeface(custom_font);
+        TextView title = setTextFor(R.id.activityTitle, userName);
+        //title.setTypeface(custom_font);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int points =  prefs.getInt("POINTS", 0);
 
-        TextView ecopoints = setTextFor(R.id.ecopoints, "" + points);
+        Button but_points = (Button) findViewById(R.id.points);
+        but_points.setText(points + " pontos");
+
     }
 }
