@@ -7,7 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
     private static final String TAG = "MainActivity";
@@ -27,15 +27,37 @@ public class MainActivity extends ListActivity {
             "HD Externo 500 GB Seagate"
     };
 
+    Integer[] imgDosBrindes ={
+            R.drawable.ic_mapa,
+            R.drawable.ic_android,
+            R.drawable.ic_arrow_back,
+            R.drawable.ic_dashboard_black_24dp,
+            R.drawable.ic_assignment,
+            R.drawable.ic_perfil,
+            R.drawable.ic_backup,
+            R.drawable.ic_autorenew,
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
-        this.setListAdapter(new ArrayAdapter<String>(
-                this, R.layout.my_list,
-                R.id.Itemname,itemname));
+        setUpListViewItens();
 
+        setUpNavigation();
+
+    }
+
+    private void setUpListViewItens() {
+        ListView list = (ListView)findViewById(android.R.id.list);
+        CustomAdapter adapter = new CustomAdapter(this, itemname, imgDosBrindes);
+        list.setAdapter(adapter);
+    }
+
+    private void setUpNavigation() {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.ic_arrow);
@@ -70,7 +92,6 @@ public class MainActivity extends ListActivity {
                 return false;
             }
         });
-
     }
 
 
