@@ -24,12 +24,12 @@
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:orientation="horizontal"
-                card_view:cardCornerRadius="10dp"
-                card_view:cardElevation="1dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="1dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -41,48 +41,54 @@
                         android:layout_height="140dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
                         android:padding="0dp"
+                        android:src="@drawable/user"
                         app:civ_border_color="#00000000"
                         app:civ_border_width="10dp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@+id/profileImg"
-                    android:layout_toEndOf="@+id/profileImg"
-                    android:padding="0dp">
-
-                    <TextView
-                        android:id="@+id/activityTitle"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Gileade Kelvin"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="32sp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_height="match_parent"
+                        android:layout_toEndOf="@+id/profileImg"
+                        android:layout_toRightOf="@+id/profileImg"
+                        android:padding="0dp">
 
-                    <Button
-                        android:id="@+id/points"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20 pontos"
-                        android:textAllCaps="false"
-                        android:textSize="18sp"
-                        android:textColor="#FFFFFF"
-                        android:background="@drawable/mybutton"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="17dp" />
+                        <TextView
+                            android:id="@+id/activityTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Nicodemos Araújo"
+                            android:textAlignment="center"
+                            android:textColor="#0C5D44"
+                            android:textSize="25sp" />
 
-                </RelativeLayout>
+                        <Button
+                            android:id="@+id/points"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/mybutton"
+                            android:text="20 pontos"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="30sp" />
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -91,32 +97,84 @@
                 android:id="@+id/cardView2"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:orientation="horizontal"
-                card_view:cardCornerRadius="10dp"
-                card_view:cardElevation="1dp"
+                android:layout_below="@+id/cardView"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/cardView">
+                android:orientation="horizontal"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="1dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/premiacoes"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:fontFamily="sans-serif-condensed"
-                            android:text="Premiações"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="26sp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
+                    <TextView
+                        android:id="@+id/premiacoes"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Premiações"
+                        android:textStyle="bold"
+                        android:textColor="#666666"
+                        android:textSize="26sp" />
 
+                    <ImageView
+                        android:id="@+id/ecofriend_img"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/premiacoes"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:adjustViewBounds="false"
+                        android:src="@drawable/ecofriend" />
+
+                    <ImageView
+                        android:id="@+id/lock1"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/premiacoes"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@+id/ecofriend_img"
+                        android:layout_toRightOf="@+id/ecofriend_img"
+                        android:adjustViewBounds="false"
+                        android:src="@drawable/lock" />
+
+                    <ImageView
+                        android:id="@+id/lock2"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/premiacoes"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@+id/lock1"
+                        android:layout_toRightOf="@+id/lock1"
+                        android:adjustViewBounds="false"
+                        android:src="@drawable/lock" />
+
+                    <ImageView
+                        android:id="@+id/lock3"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/premiacoes"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@+id/lock2"
+                        android:layout_toRightOf="@+id/lock2"
+                        android:adjustViewBounds="false"
+                        android:src="@drawable/lock" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -125,31 +183,44 @@
                 android:id="@+id/cardView3"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:orientation="horizontal"
-                card_view:cardCornerRadius="10dp"
-                card_view:cardElevation="1dp"
+                android:layout_below="@+id/cardView2"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/cardView2">
+                android:orientation="horizontal"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="1dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/config"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Configurações"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="26sp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
+
+                    <ImageView
+                        android:id="@+id/config_img"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:src="@drawable/ic_config"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        />
+
+                    <ImageView
+                        android:id="@+id/mypoints_img"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:src="@drawable/ic_mypoints"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp" />
 
 
                 </RelativeLayout>
@@ -167,11 +238,11 @@
                 android:id="@+id/bottomNavView_Bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/white_grey_border_top"
-                app:menu="@menu/bottom_navigation_menu"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
+                android:background="@drawable/white_grey_border_top"
+                app:menu="@menu/bottom_navigation_menu">
 
 
             </android.support.design.widget.BottomNavigationView>

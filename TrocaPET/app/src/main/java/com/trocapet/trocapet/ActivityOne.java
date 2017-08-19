@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -50,7 +52,8 @@ public class ActivityOne extends AppCompatActivity {
 
         setContentView(R.layout.activity_one);
 
-        setProfilePicture(R.drawable.gilekel);
+        //setProfilePicture(R.drawable.gilekel);
+
 
         setUpTextViews();
 
@@ -119,15 +122,19 @@ public class ActivityOne extends AppCompatActivity {
 
     private void setUpTextViews() {
 
-        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/dancing-script.regular.ttf");
-        TextView title = setTextFor(R.id.activityTitle, userName);
-        //title.setTypeface(custom_font);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/FuturaBookBT.ttf");
+        TextView user_name = (TextView) findViewById(R.id.activityTitle);
+        user_name.setTypeface(custom_font);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int points =  prefs.getInt("POINTS", 0);
 
+        TextView premiacoes = (TextView) findViewById(R.id.premiacoes);
+        premiacoes.setTypeface(custom_font);
+
         Button but_points = (Button) findViewById(R.id.points);
         but_points.setText(points + " pontos");
+        but_points.setTypeface(custom_font);
 
     }
 }
