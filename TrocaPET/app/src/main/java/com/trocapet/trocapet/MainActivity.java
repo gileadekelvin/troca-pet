@@ -16,28 +16,6 @@ public class MainActivity extends ListActivity {
 
     private ViewPager mViewPager;
 
-    String[] itemname ={
-            "Impressora Preto e Branco",
-            "Celular Moto G1",
-            "Headphone Samsung",
-            "Monitor 21' AOC",
-            "Coca-Cola 2L",
-            "Pen-drive Kingston 16GB",
-            "Mouse Sem Fio Multilaser",
-            "HD Externo 500 GB Seagate"
-    };
-
-    Integer[] imgDosBrindes ={
-            R.drawable.ic_mapa,
-            R.drawable.ic_android,
-            R.drawable.ic_arrow_back,
-            R.drawable.ic_dashboard_black_24dp,
-            R.drawable.ic_assignment,
-            R.drawable.ic_perfil,
-            R.drawable.ic_backup,
-            R.drawable.ic_autorenew
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,32 +45,31 @@ public class MainActivity extends ListActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
-
                         break;
 
                     case R.id.navigation_perfil:
-                        Intent intent1 = new Intent(MainActivity.this, ActivityOne.class);
-                        intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent1);
+                        iniciarActivity(ActivityOne.class);
                         break;
 
                     case R.id.navigation_mapa:
-                        Intent intent2 = new Intent(MainActivity.this, MapsActivity.class);
-                        intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent2);
+                        iniciarActivity(MapsActivity.class);
                         break;
 
                     case R.id.navigation_qrcode:
-                        Intent intent3 = new Intent(MainActivity.this, QRCodeActivity.class);
-                        intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent3);
+                        iniciarActivity(QRCodeActivity.class);
                         break;
                 }
-
                 return false;
             }
         });
     }
 
+    private void iniciarActivity(final Class<?> activityQueVaiSerIniciada) {
+        Intent intent = new Intent(MainActivity.this, activityQueVaiSerIniciada);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+        startActivity(intent);
+    }
 
 }

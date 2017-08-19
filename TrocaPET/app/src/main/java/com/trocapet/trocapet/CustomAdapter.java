@@ -24,10 +24,10 @@ public class CustomAdapter extends ArrayAdapter{
     private final Integer[] imgsID;
 
     private final static String[] brindes = {
-            "Impressora Preto e Branco",
+            "Impressora HP Preto e Branco",
             "Celular Moto G1",
             "Headphone Samsung",
-            "Monitor 21' AOC",
+            "Monitor 21.5' AOC",
             "Coca-Cola 2L",
             "Pen-drive Kingston 16GB",
             "Mouse Sem Fio Multilaser",
@@ -35,17 +35,17 @@ public class CustomAdapter extends ArrayAdapter{
     };
 
     private final static Integer[] imgsDosBrindes = {
-            R.drawable.ic_mapa,
-            R.drawable.ic_android,
-            R.drawable.ic_arrow_back,
-            R.drawable.ic_dashboard_black_24dp,
-            R.drawable.ic_assignment,
-            R.drawable.ic_perfil,
-            R.drawable.ic_backup,
-            R.drawable.ic_autorenew
+            R.drawable.impressoa_pb,
+            R.drawable.motog1,
+            R.drawable.headphone,
+            R.drawable.monitor,
+            R.drawable.coca_cola_2litros,
+            R.drawable.pendrive_16gb,
+            R.drawable.mouse_sem_fio,
+            R.drawable.hd500gb
     };
 
-    //talvez depois usar um mapa <brinde, ecopoints>.
+    //talvez criar um objeto brinde.
     private final Integer[] ecopointsCadaBrinde = {
             1500,
             2000,
