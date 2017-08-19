@@ -35,7 +35,7 @@ public class MainActivity extends ListActivity {
             R.drawable.ic_assignment,
             R.drawable.ic_perfil,
             R.drawable.ic_backup,
-            R.drawable.ic_autorenew,
+            R.drawable.ic_autorenew
     };
 
 
@@ -53,7 +53,7 @@ public class MainActivity extends ListActivity {
 
     private void setUpListViewItens() {
         ListView list = (ListView)findViewById(android.R.id.list);
-        CustomAdapter adapter = new CustomAdapter(this, itemname, imgDosBrindes);
+        CustomAdapter adapter = CustomAdapter.createAdapter(this);
         list.setAdapter(adapter);
     }
 
