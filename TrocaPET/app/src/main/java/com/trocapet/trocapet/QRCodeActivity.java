@@ -14,10 +14,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -152,7 +150,7 @@ public class QRCodeActivity extends AppCompatActivity {
                             .show();
                 }
             }
-            
+
         } else {
             System.out.println("Qrcode null");
             super.onActivityResult(requestCode, resultCode, data);

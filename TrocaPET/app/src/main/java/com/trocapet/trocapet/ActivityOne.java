@@ -9,22 +9,15 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * Created by User on 4/15/2017.
@@ -42,7 +35,6 @@ public class ActivityOne extends AppCompatActivity {
         int points =  prefs.getInt("POINTS", 0);
         Button but_points = (Button) findViewById(R.id.points);
         but_points.setText(points + " pontos");
-
     }
 
     @Override
@@ -83,11 +75,12 @@ public class ActivityOne extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
 
-    private void startPassedActivity(final Class<?> activityToStart) {
-        Intent intent = new Intent(ActivityOne.this, activityToStart);
+    private void startPassedActivity(final Class<?> activityQueVaiSerIniciada) {
+        Intent intent = new Intent(ActivityOne.this, activityQueVaiSerIniciada);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
@@ -127,6 +120,5 @@ public class ActivityOne extends AppCompatActivity {
         Button but_points = (Button) findViewById(R.id.points);
         but_points.setText(points + " pontos");
         but_points.setTypeface(custom_font);
-
     }
 }
