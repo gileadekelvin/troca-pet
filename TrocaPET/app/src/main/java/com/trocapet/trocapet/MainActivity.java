@@ -1,15 +1,15 @@
 package com.trocapet.trocapet;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ListActivity {
     private static final String TAG = "MainActivity";
 
     private SectionsPageAdapter mSectionsPageAdapter;
@@ -20,21 +20,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
-        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        setUpListViewItens();
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        setupViewPager(mViewPager);
+        setUpNavigation();
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+    }
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_assignment);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_autorenew);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_attach_file);
+    private void setUpListViewItens() {
+        ListView list = (ListView)findViewById(android.R.id.list);
+        CustomAdapter adapter = CustomAdapter.createAdapter(this);
+        list.setAdapter(adapter);
+    }
 
+    private void setUpNavigation() {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.ic_arrow);
@@ -44,43 +45,31 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
-
                         break;
 
                     case R.id.navigation_perfil:
-                        Intent intent1 = new Intent(MainActivity.this, ActivityOne.class);
-                        intent1.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent1);
+                        iniciarActivity(ActivityOne.class);
                         break;
 
                     case R.id.navigation_mapa:
-                        Intent intent2 = new Intent(MainActivity.this, MapsActivity.class);
-                        intent2.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent2);
+                        iniciarActivity(MapsActivity.class);
                         break;
 
                     case R.id.navigation_qrcode:
-                        Intent intent3 = new Intent(MainActivity.this, QRCodeActivity.class);
-                        intent3.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent3);
+                        iniciarActivity(QRCodeActivity.class);
                         break;
-
-
                 }
-
-
                 return false;
             }
         });
-
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Tab1Fragment());
-        adapter.addFragment(new Tab2Fragment());
-        adapter.addFragment(new Tab3Fragment());
-        viewPager.setAdapter(adapter);
+    private void iniciarActivity(final Class<?> activityQueVaiSerIniciada) {
+        Intent intent = new Intent(MainActivity.this, activityQueVaiSerIniciada);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+        startActivity(intent);
     }
 
 }
