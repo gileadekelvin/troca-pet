@@ -20,54 +20,18 @@ public class CustomAdapter extends ArrayAdapter{
 
     private final Activity context;
 
-    private final String[] itemName;
-    private final Integer[] imgsID;
+    private final static String[] nomeDosBrindes = BrindeController.getNomeTodosBrindes();
 
-    private final static String[] brindes = {
-            "Impressora HP Preto e Branco",
-            "Celular Moto G1",
-            "Headphone Samsung",
-            "Monitor 21.5' AOC",
-            "Coca-Cola 2L",
-            "Pen-drive Kingston 16GB",
-            "Mouse Sem Fio Multilaser",
-            "HD Externo 500 GB Seagate"
-    };
-
-    private final static Integer[] imgsDosBrindes = {
-            R.drawable.impressoa_pb,
-            R.drawable.motog1,
-            R.drawable.headphone,
-            R.drawable.monitor,
-            R.drawable.coca_cola_2litros,
-            R.drawable.pendrive_16gb,
-            R.drawable.mouse_sem_fio,
-            R.drawable.hd500gb
-    };
-
-    //talvez criar um objeto brinde.
-    private final Integer[] ecopointsCadaBrinde = {
-            1500,
-            2000,
-            150,
-            900,
-            20,
-            65,
-            250,
-            600
-    };
     private String descricaoBrinde;
 
-    public CustomAdapter(final Activity context, final String[] itemName, final Integer[] imgsID) {
+    private CustomAdapter(final Activity context, final String[] itemName) {
         super(context, R.layout.my_list, itemName);
 
         this.context = context;
-        this.itemName = itemName;
-        this.imgsID = imgsID;
     }
 
     public static CustomAdapter createAdapter(final Activity context){
-        return new CustomAdapter(context, brindes, imgsDosBrindes);
+        return new CustomAdapter(context, nomeDosBrindes);
     }
 
     public View getView(int position, View view, ViewGroup parent) {
@@ -77,17 +41,24 @@ public class CustomAdapter extends ArrayAdapter{
 
         setUpViewsIn(rowView);
 
-        txtTitle.setText(itemName[position]);
-        imageView.setImageResource(imgsID[position]);
-
-        descricaoBrinde = "Requer " + ecopointsCadaBrinde[position] + " ecopoints.";
-        txtDescription.setText(descricaoBrinde);
+        setUpBrindeInfo(position);
 
         return rowView;
 
     }
 
-    private void setUpViewsIn(View rowView) {
+    private void setUpBrindeInfo(int position) {
+        Brinde brindeAtual = BrindeController.getBrinde(position);
+
+        txtTitle.setText(brindeAtual.getNome());
+
+        imageView.setImageResource(brindeAtual.getIdFoto());
+
+        descricaoBrinde = "Requer " + brindeAtual.getEcopointsRequeridos() + " ecopoints.";
+        txtDescription.setText(descricaoBrinde);
+    }
+
+    private void setUpViewsIn(final View rowView) {
 
         txtTitle = (TextView) rowView.findViewById(R.id.item_name);
 
