@@ -3,6 +3,7 @@ package com.trocapet.trocapet;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
@@ -20,14 +22,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by User on 4/15/2017.
  */
 
-
 public class ActivityOne extends AppCompatActivity {
 
-    private String userName = "Gileade";
+    private String userName = "Gileade Kelvin";
 
     @Override
     protected void onResume(){
@@ -35,7 +40,8 @@ public class ActivityOne extends AppCompatActivity {
         // atualiza pontuação com a activity em resumo (em segundo plano)
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int points =  prefs.getInt("POINTS", 0);
-        setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
+        Button but_points = (Button) findViewById(R.id.points);
+        but_points.setText(points + " pontos");
 
     }
 
@@ -44,8 +50,6 @@ public class ActivityOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_one);
-
-        setProfilePicture(R.drawable.gilekel);
 
         setUpTextViews();
 
@@ -90,7 +94,6 @@ public class ActivityOne extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     private TextView setTextFor(final int textViewToSetUpTheText, final String textContent){
         TextView view = (TextView) findViewById(textViewToSetUpTheText);
 
@@ -99,24 +102,31 @@ public class ActivityOne extends AppCompatActivity {
         return view;
     }
 
-
     private void setProfilePicture(final int pictureIdLocation) {
-        ImageView mImageView = (ImageView) findViewById(R.id.profileImg);
+        CircleImageView mImageView = (CircleImageView) findViewById(R.id.profileImg);
 
         mImageView.setImageResource(pictureIdLocation);
-        mImageView.setAdjustViewBounds(true);
-        mImageView.setMaxHeight(650);
-        mImageView.setMaxWidth(650);
-    }
+        mImageView.setAdjustViewBounds(false);
+        mImageView.setMaxHeight(800);
+        mImageView.setMaxWidth(800);
 
+    }
 
     private void setUpTextViews() {
 
-        TextView title = setTextFor(R.id.activityTitle1, "Olá, " + userName);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/FuturaBookBT.ttf");
+        TextView user_name = (TextView) findViewById(R.id.activityTitle);
+        user_name.setTypeface(custom_font);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int points =  prefs.getInt("POINTS", 0);
 
-        TextView ecopoints = setTextFor(R.id.ecopoints, "Você possui: " + points + " ecopoints");
+        TextView premiacoes = (TextView) findViewById(R.id.premiacoes);
+        premiacoes.setTypeface(custom_font);
+
+        Button but_points = (Button) findViewById(R.id.points);
+        but_points.setText(points + " pontos");
+        but_points.setTypeface(custom_font);
+
     }
 }
