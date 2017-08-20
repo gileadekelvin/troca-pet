@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -42,22 +43,24 @@ public class QRCodeActivity extends AppCompatActivity {
 
         final Activity activity = this;
 
+        // Ajustando fonte
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/FuturaBookBT.ttf");
+
         qrcode_message = (TextView) findViewById(R.id.qrcode_message);
-        qrcode_message.setText("Conecte-se ao coletor através do seu celular e troque suas garrafas PET. Clique no QRcode para iniciar leitura.");
+        qrcode_message.setTypeface(custom_font);
 
+        TextView qrcode_message2 = (TextView) findViewById(R.id.qrcode_message2);
+        qrcode_message2.setTypeface(custom_font);
+
+        // Ajustando ação de leitura do qrcode
         qrcode_img = (ImageView) findViewById(R.id.qrcode_img);
-
-        qrcode_img.setImageResource(R.drawable.qrcode_img);
-        qrcode_img.setAdjustViewBounds(true);
-        qrcode_img.setMaxHeight(750);
-        qrcode_img.setMaxWidth(750);
 
         qrcode_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("SCAN");
+                integrator.setPrompt("Recicla Point");
                 integrator.setCameraId(0);
                 integrator.setBeepEnabled(false);
                 integrator.setBarcodeImageEnabled(false);
@@ -149,10 +152,7 @@ public class QRCodeActivity extends AppCompatActivity {
                             .show();
                 }
             }
-
-
-
-
+            
         } else {
             System.out.println("Qrcode null");
             super.onActivityResult(requestCode, resultCode, data);

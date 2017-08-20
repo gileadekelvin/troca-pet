@@ -30,7 +30,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by User on 4/15/2017.
  */
 
-
 public class ActivityOne extends AppCompatActivity {
 
     private String userName = "Gileade Kelvin";
@@ -51,9 +50,6 @@ public class ActivityOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_one);
-
-        //setProfilePicture(R.drawable.gilekel);
-
 
         setUpTextViews();
 
@@ -98,7 +94,6 @@ public class ActivityOne extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     private TextView setTextFor(final int textViewToSetUpTheText, final String textContent){
         TextView view = (TextView) findViewById(textViewToSetUpTheText);
 
@@ -106,7 +101,6 @@ public class ActivityOne extends AppCompatActivity {
 
         return view;
     }
-
 
     private void setProfilePicture(final int pictureIdLocation) {
         CircleImageView mImageView = (CircleImageView) findViewById(R.id.profileImg);
@@ -116,9 +110,7 @@ public class ActivityOne extends AppCompatActivity {
         mImageView.setMaxHeight(800);
         mImageView.setMaxWidth(800);
 
-
     }
-
 
     private void setUpTextViews() {
 

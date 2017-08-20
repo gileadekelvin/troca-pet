@@ -12,49 +12,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/topBar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-            </android.support.design.widget.AppBarLayout>
-
-        </RelativeLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/topBar"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/bottomBar">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="20dp"
                 android:textSize="24sp"
                 android:id="@+id/qrcode_message"
-                android:textAlignment="center"
+                android:layout_gravity="right"
                 android:fontFamily="sans-serif-condensed"
+                android:text="Obtenha acesso à máquina em seu celular para o descarte das garrafas pet."
                 android:textColor="@color/colorPrimary"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:id="@+id/qrcode_message2"
+                android:layout_gravity="right"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Clique no QRcode."
+                android:textColor="#13845B"
+                android:layout_below="@id/qrcode_message"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_height="match_parent"
                 android:id="@+id/qrcode_img"
+                android:src="@drawable/qr_code"
                 android:layout_below="@+id/qrcode_message"
                 android:layout_centerHorizontal="true"
-                android:scaleType="center"
+                android:layout_margin="40dp"
                 android:adjustViewBounds="false" />
 
         </RelativeLayout>
