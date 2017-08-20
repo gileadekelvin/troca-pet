@@ -66,7 +66,7 @@
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="20dp"
                             android:fontFamily="sans-serif-condensed"
-                            android:text="Nicodemos Araújo"
+                            android:text="André Silva"
                             android:textAlignment="center"
                             android:textColor="#0C5D44"
                             android:textSize="25sp" />
